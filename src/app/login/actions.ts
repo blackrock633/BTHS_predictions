@@ -27,22 +27,38 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
   const supabase = await createClient()
 
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-    options: {
-      data: {
-        full_name: formData.get('full_name') as string,
-      }
-    }
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+  const full_name = formData.get('full_name') as string
+
+  // Create admin client to bypass email confirmation
+  const { createClient: createSupabaseClient } = require('@supabase/supabase-js')
+  const supabaseAdmin = createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+
+  const { error: adminError } = await supabaseAdmin.auth.admin.createUser({
+    email,
+    password,
+    email_confirm: true,
+    user_metadata: { full_name }
+  })
+
+  if (adminError) {
+    redirect('/login?message=' + encodeURIComponent(adminError.message))
   }
 
-  const { error } = await supabase.auth.signUp(data)
+  // Now log the user in
+  const { error: signInError } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  })
 
-  if (error) {
-    redirect('/login?message=' + encodeURIComponent(error.message))
+  if (signInError) {
+    redirect('/login?message=' + encodeURIComponent(signInError.message))
   }
 
   revalidatePath('/', 'layout')
-  redirect('/login?message=Check email to continue sign in process')
+  redirect('/')
 }

@@ -153,10 +153,44 @@ export default async function Home() {
       {/* Player Markets Section */}
       <section className="space-y-8">
         <div className="flex items-center gap-4">
-          <h2 className="text-2xl font-black uppercase tracking-tighter text-white">Target Entities</h2>
+          <h2 className="text-2xl font-black uppercase tracking-tighter text-white">Senior Assassin Winner</h2>
           <div className="flex-1 h-[1px] bg-gradient-to-r from-[rgba(255,255,255,0.1)] to-transparent"></div>
         </div>
-        <MarketGrid candidates={playerCandidates} totalPool={totalPool} />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="relative group perspective-1000" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 400px' }}>
+            <div className="bg-[rgba(255,255,255,0.05)] backdrop-blur-[8px] border border-[#00E0FF]/30 rounded-[18px] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.4)] transition-all duration-500 hover:border-[#00E0FF]/80 hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(0,224,255,0.2)] flex flex-col h-full overflow-hidden transform-gpu" style={{ transform: 'translateZ(0)' }}>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E0FF]/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none transition-all duration-500 group-hover:bg-[#7C5CFF]/20"></div>
+              
+              <div className="flex justify-between items-start mb-6 z-10">
+                <div className="h-14 w-14 rounded-full border border-[rgba(255,255,255,0.2)] shadow-xl bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <span className="bg-[#00E0FF]/10 text-[#00E0FF] border border-[#00E0FF]/30 font-mono rounded-md uppercase tracking-wider text-[10px] px-2 py-1">
+                  Global Market
+                </span>
+              </div>
+
+              <div className="mb-8 z-10 flex-1">
+                <h3 className="text-2xl font-bold tracking-tight mb-1 text-white">
+                  Senior Assassin Winner
+                </h3>
+                <div className="flex items-center gap-4 mt-4">
+                  <div>
+                    <p className="text-[12px] font-mono text-[#9CA0AA] uppercase tracking-wider">Total Combined Pool</p>
+                    <p className="font-mono text-lg text-[#00E0FF]">${(playerCandidates.reduce((sum, c) => sum + c.pool_amount, 0) / 100).toFixed(2)}</p>
+                  </div>
+                </div>
+              </div>
+
+              <a href={`/players`} className="mt-auto z-10 w-full block">
+                <button className="w-full py-3 rounded-xl font-bold text-[14px] uppercase tracking-wider transition-all duration-300 bg-[rgba(255,255,255,0.05)] text-white hover:bg-white hover:text-black border border-[rgba(255,255,255,0.1)]">
+                  View Candidates
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   )
