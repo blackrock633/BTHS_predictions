@@ -27,9 +27,9 @@ export default async function Navbar() {
   }
 
   return (
-    <div className="fixed top-10 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
-      <nav className="pointer-events-auto w-full max-w-[1200px] bg-[rgba(255,255,255,0.06)] backdrop-blur-[18px] border border-[rgba(255,255,255,0.18)] rounded-[18px] shadow-[0_20px_60px_rgba(0,0,0,0.6)] animate-fade-down overflow-hidden relative">
-        <div className="px-6 h-[72px] flex items-center justify-between">
+    <div className="fixed top-6 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
+      <nav className="pointer-events-auto w-full max-w-[1000px] bg-[rgba(10,10,15,0.4)] backdrop-blur-2xl border border-white/10 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)] animate-fade-down relative transition-all duration-500 hover:shadow-[0_12px_40px_rgba(124,92,255,0.2),inset_0_1px_1px_rgba(255,255,255,0.1)]">
+        <div className="px-6 h-[64px] flex items-center justify-between">
           <div className="flex items-center gap-8">
             <Link href="/" className="font-bold uppercase tracking-widest text-lg flex items-center gap-3">
               <Image src="/logo.png" alt="BTHS Logo" width={32} height={32} className="rounded-md border border-[#7C5CFF]/30 shadow-[0_0_15px_rgba(124,92,255,0.4)]" />
@@ -58,14 +58,14 @@ export default async function Navbar() {
             {user ? (
               <>
                 <div className="hidden sm:flex items-center gap-3">
-                  <span className="font-mono text-[#9CA0AA] text-sm">BAL:</span>
-                  <span className="font-mono text-white text-sm bg-[rgba(255,255,255,0.05)] px-3 py-1.5 rounded-lg border border-[rgba(255,255,255,0.1)]">
+                  <span className="font-mono text-[#9CA0AA] text-xs uppercase tracking-widest">BAL</span>
+                  <span className="font-mono text-[#00E0FF] text-sm font-bold bg-[#00E0FF]/10 px-3 py-1.5 rounded-full border border-[#00E0FF]/20">
                     ${(balance / 100).toFixed(2)}
                   </span>
                 </div>
                 
                 <Link href="/deposit">
-                  <button className="bg-transparent border border-[rgba(255,255,255,0.2)] text-white text-[14px] font-medium px-5 py-2.5 rounded-xl hover:bg-[rgba(255,255,255,0.05)] transition-colors">
+                  <button className="bg-white/5 border border-white/10 text-white text-[13px] font-semibold px-5 py-2 rounded-full hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                     Deposit
                   </button>
                 </Link>
@@ -79,12 +79,12 @@ export default async function Navbar() {
             ) : (
               <>
                 <Link href="/login">
-                  <button className="bg-transparent text-white text-[14px] font-medium px-5 py-2.5 rounded-xl hover:bg-[rgba(255,255,255,0.05)] transition-colors">
+                  <button className="bg-transparent text-white text-[13px] font-semibold px-5 py-2 rounded-full hover:bg-white/5 transition-all duration-300">
                     Log in
                   </button>
                 </Link>
                 <Link href="/login">
-                  <button className="bg-gradient-to-r from-[#7C5CFF] to-[#00E0FF] text-white text-[14px] font-bold px-6 py-2.5 rounded-xl shadow-[0_4px_14px_rgba(124,92,255,0.4)] transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_8px_24px_rgba(124,92,255,0.6)]">
+                  <button className="bg-gradient-to-r from-[#7C5CFF] to-[#00E0FF] text-white text-[13px] font-bold px-6 py-2 rounded-full shadow-[0_4px_14px_rgba(124,92,255,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_24px_rgba(124,92,255,0.6)]">
                     Sign Up Free
                   </button>
                 </Link>
@@ -92,8 +92,6 @@ export default async function Navbar() {
             )}
           </div>
         </div>
-        {/* Brutalist gradient divider line below navbar content but inside the container */}
-        <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#7C5CFF] to-[#00E0FF]"></div>
       </nav>
     </div>
   )
